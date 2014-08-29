@@ -1,0 +1,92 @@
+<div class="container">
+ <div app-messages></div>
+  <h1>User Detail</h1>
+   <form name="userForm" novalidate="novalidate" >
+		 <table class="table table-condensed">
+			<tr>
+				<td>
+					<div class="form-group">
+						<label for="firstName">First name &nbsp;<span ng-show="userForm.firstName.$invalid" class="glyphicon glyphicon-flag"</span></label><br/>
+						<input type="text" id="firstName" name="firstName" ng-model="user.firstName"  placeholder="First name" required/>
+						<div class="validation-error" ng-show="userForm.firstName.$invalid && userForm.firstName.$dirty">
+							 <span ng-show="userForm.firstName.$error.required">Required.</span>
+						</div>
+					</div>
+				</td>
+				<td>
+					<div class="form-group">
+						<label for="lastName">Last name &nbsp;<span ng-show="userForm.lastName.$invalid" class="glyphicon glyphicon-flag"</span></label><br/>
+						<input type="text"  id="lastName" name="lastName" ng-model="user.lastName"  placeholder="Last name"  required />
+						<div class="validation-error" ng-show="userForm.lastName.$invalid && userForm.lastName.$dirty">
+							 <span ng-show="userForm.lastName.$error.required">Required.</span>
+						</div>
+					</div>
+				</td>
+				<td/>
+			</tr>
+			<tr>
+				<td>
+					<div class="form-group">
+						<label for="dateOfBirth">Date of Birth&nbsp;<span ng-show="userForm.dateOfBirth.$invalid" class="glyphicon glyphicon-flag"</span></label><br/>
+						<input type="text" id="dateOfBirth" name="dateOfBirth" ng-model="user.dateOfBirth" datepicker-popup="{{calendar.dateFormat}}" is-open="calendar.opened.dateOfBirth" datepicker-options="calendar.dateOptions" placeholder="Date of Birth" required/>
+						<a ng-click="calendar.open($event,'dateOfBirth')"><i class="glyphicon glyphicon-calendar"></i></a>
+						<div class="validation-error" ng-show="userForm.dateOfBirth.$invalid && userForm.dateOfBirth.$dirty">
+							 <span ng-show="userForm.dateOfBirth.$error.required">Required.</span>
+							 <span ng-show="userForm.dateOfBirth.$invalid">Please enter a valid Date of Birth</span>
+						</div>
+					</div>
+				</td>
+				<td>
+					<div class="form-group">
+						<label for="startDt">Start Date</label><br/>
+						<input type="text" id="startDt" ng-model="user.startDt" datepicker-popup="{{calendar.dateFormat}}" is-open="calendar.opened.startDt" datepicker-options="calendar.dateOptions" placeholder="Start Date" />
+						<a ng-click="calendar.open($event,'startDt')"><i class="glyphicon glyphicon-calendar"></i></a>
+					</div>
+				</td>
+				<td>
+					<div class="form-group">
+						<label for="endDt">End Date</label><br/>
+						<input type="text" id="endDt" ng-model="user.endDt" datepicker-popup="{{calendar.dateFormat}}" is-open="calendar.opened.endDt" datepicker-options="calendar.dateOptions" placeholder="End Date" />
+						<a ng-click="calendar.open($event,'endDt')"><i class="glyphicon glyphicon-calendar"></i></a>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="form-group">
+						<label for="email">Email<span ng-show="userForm.email.$invalid" class="glyphicon glyphicon-flag"</span></label><br/>
+						<input type="email" id="email" name="email" ng-model="user.email"  placeholder="Email" required />
+                        <div class="validation-error" ng-show="userForm.email.$invalid && userForm.email.$dirty">
+                            <span ng-show="userForm.email.$error.required">Required.</span>
+                            <span ng-show="userForm.email.$error.email">Please enter a valid E-mail</span>
+                        </div>
+					</div>
+				</td>
+				<td>
+					<div class="form-group">
+						<label for="code">Code<span ng-show="userForm.code.$invalid" class="glyphicon glyphicon-flag"</span></label><br/>
+						<input type="text" id="code" name="code" ng-model="user.code"  placeholder="Code" ng-minlength="3" ng-maxlength="5" ng-pattern="/^[A-Z]/" />
+						<div class="validation-error" ng-show="userForm.code.$invalid && userForm.code.$dirty">
+                            <span ng-show="userForm.code.$error.minlength">Please enter at least 3 chars</span>
+                            <span ng-show="userForm.code.$error.maxlength">Please enter at most 5 chars</span>
+                            <span ng-show="userForm.code.$error.pattern">Please enter an uppercase alphabetic characters as the first character</span>
+						</div>
+					</div>
+				</td>
+				<td/>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+					<span ng-if="isEditMode">
+						<a ng-disabled="userForm.$invalid" ng-click="updateUser()"  class="btn btn-small btn-primary">Update</a>
+					</span>
+
+					<span ng-if="!isEditMode">
+						<a ng-disabled="userForm.$invalid" ng-click="createUser()"  class="btn btn-small btn-primary">Add</a>
+					</span>
+				</td>
+			</tr>
+		</table>
+  </form>
+</div>

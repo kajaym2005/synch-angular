@@ -1,0 +1,28 @@
+/* display error message styled in red */
+.errorMessage {
+    border: 2px #e92d0c solid;
+    font-size: 12px;
+    font-family: arial;
+    padding: 10px;
+    width: 702px;
+    margin-bottom: 1px;
+}
+/* display success message styled in green */
+.successMessage {
+    border: 2px #25ae09 solid;
+    font-size: 12px;
+    font-family: arial;
+    padding: 10px;
+    width: 702px;
+    margin-bottom: 1px;
+}
+
+form .ng-invalid.ng-dirty { border: 1px #e92d0c solid; //background-color: lightpink; }
+form .ng-valid.ng-dirty { //background-color: lightgreen; }
+form .ng-invalid-email.ng-dirty { background-color: lightgoldenrodyellow; }
+form .ng-invalid-minlength.ng-dirty { background-color: lightgoldenrodyellow; }
+
+div.validation-error {
+	padding: 2px 4px;
+	color: red;
+}

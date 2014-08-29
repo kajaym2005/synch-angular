@@ -1,0 +1,77 @@
+<div class="span6">
+	<h4>Flight PLAN</h4>
+	<div style="...">
+		<h3>Search for flight</h3>
+		<!-- validation message -->
+		<div class="container row span4 alert alert-danger" ng-show="isError" role="alert"><strong>{{messageLevel}}</strong> {{message}}</div>
+
+		<form name="flightForm" class="well row simple-form" novalidate>
+
+			<!-- carrier -->
+			<div class="col-xs-2 col-xs-8">
+				<div class="form-group" ng-class="{'has-error' : flightForm.carrier.$invalid}">
+					<label for="carrier">Carrier *</label>
+					<input type="text" class="form-control" id="carrier" name="carrier" ng-model="flight.carrier" placeholder="Enter Carrier" required ng-minlength=2 ng-maxlength=4>
+				</div>
+			</div>
+			<!-- flight number -->
+			<div class="col-xs-2">
+				<div class="form-group" ng-class="{'has-error' :flightForm.flightNumber.$invalid}">
+					<label for="flightNumber">Flight Number *</label>
+					<input type="text" class="form-control" id="flightNumber" name="flightNumber" ng-model="flight.flightNumber" placeholder="Enter Flight Number" required ng-minlength=2 ng-maxlength=10>
+				</div>
+			</div>
+			<!-- leg origin -->
+			<div class="col-xs-2">
+				<div class="form-group" ng-class="{'has-error' : flightForm.legOrig.$invalid}">
+					<label for="legOrig">Leg Origin *</label>
+
+					<!-- <input type="text" class="form-control" id="legOrig" name="legOrig" ng-model="flight.legOrig" placeholder="Enter Leg Origin" required ng-minlength=2 ng-maxlength=10> -->
+
+					<div angucomplete-alt id="ex1" placeholder="Enter Leg Origin" id="legOrig" name="legOrig" ng-model="flight.legOrig"
+						pause="100" selected-object="selectedCountry"
+						local-data="countries" search-fields="name" title-field="name"
+						minlength="1" input-class="form-control form-control-small"
+						match-class="highlight">
+					</div>
+				</div>
+			</div>
+			<!-- leg destination -->
+			<div class="col-xs-2">
+				<div class="form-group" ng-class="{'has-error' : flightForm.legDest.$invalid}">
+					<label for="legDest">Leg Destination *</label>
+
+					<!-- <input type="text" class="form-control" id="legDest"  name="legDest" ng-model="flight.legDest" placeholder="Enter Leg Destination" required ng-minlength=2 ng-maxlength=10> -->
+
+					<div angucomplete-alt id="legDest" name="legDest" ng-model="flight.legDest"
+						placeholder="Enter Leg Destination" pause="100"
+						selected-object="selectedCountry" local-data="countries"
+						search-fields="name" title-field="name" minlength="1"
+						input-class="form-control form-control-small"
+						match-class="highlight">
+					</div>
+				</div>
+			</div>
+			<!-- departure date -->
+			<div class="col-xs-2">
+				<div class="form-group" ng-class="{'has-error' : flightForm.deptDate.$invalid}">
+					<label for="deptDate">Departure Date *</label>
+					<input type="date" class="form-control" id="deptDate" name="deptDate" ng-model="flight.deptDate" placeholder="Enter Depature Date" required ng-minlength=2 ng-maxlength=10>
+				</div>
+			</div>
+
+			<!--TODO Calender -->
+
+			<!-- submit -->
+			<div class="col-xs-2">
+				<button class="btn btn-primary btn-default" type="button"
+					ng-click="searchFlight(flight)" >Search Flights</button>
+			</div>
+		</form>
+
+		<!-- FIXME: Remove when required. -->
+		<pre>form = {{flight | json}}</pre>
+		<pre>master = {{master1 | json}}</pre>
+</div>
+
+</div>

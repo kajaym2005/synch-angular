@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" ng-app="cargoopsApp">
+	<head>
+		<meta charset="utf-8">
+		<title>Cargo+Ops Console</title>
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="../styles/application.master.css">
+
+		<script type="text/javascript">
+			var appParams = {};
+			appParams.dateFormat='MM/dd/yyyy';
+			appParams.USER_API_URL = "http://localhost\\:8080/cargoopswar2/services/users";
+			appParams.USER_API_URL_ID = "http://localhost\\:8080/cargoopswar2/services/users/:id";
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="span6" ng-controller="NavbarController">
+				<a href="#/" 			ng-class="{active: routeIs('/')}" 			role="button" class="btn btn-primary">Home</a>
+				<a href="#/flightplan"  ng-class="{active: routeIs('/flightplan')}" role="button" class="btn btn-primary">Flight Plan</a>
+				<a href="#/loadplan"    ng-class="{active: routeIs('/loadplan')}"   role="button" class="btn btn-primary">Load Plan</a>
+				<a href="#/uldplan"     ng-class="{active: routeIs('/uldplan')}"    role="button" class="btn btn-primary">Build Plan</a>
+				<a href="#/userlist"    ng-class="{active: routeIs('/userlist')}"   role="button" class="btn btn-primary">User - CRUD</a>
+			</div>
+			<br/>
+			<img id="spinner" ng-src="../images/spinner.gif" style="display:block;">
+
+			<ng-view></ng-view>
+		</div>
+
+		<!-- JS Library -->
+		<script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+		<script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+		<script type="text/javascript" src="../bower_components/angular-route/angular-route.js"></script>
+		<script type="text/javascript" src="../bower_components/angular-resource/angular-resource.js"></script>
+		<script type="text/javascript" src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<script type="text/javascript" src="../bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+
+		<!-- App -->
+		<script type="text/javascript" src="cargoopsApp.js"></script>
+
+		<!-- Common -->
+		<script type="text/javascript" src="common/directives/CommonDirectives.js"></script>
+		<script type="text/javascript" src="common/filters/CommonFilters.js"></script>
+		<script type="text/javascript" src="common/services/CommonService.js"></script>
+
+		<!-- Console-->
+		<script type="text/javascript" src="console/controllers/ConsoleController.js"></script>
+		<script type="text/javascript" src="console/services/ConsoleService.js"></script>
+
+		<!-- FlightPlan -->
+		<script type="text/javascript" src="flightplan/controllers/FlightPlanController.js"></script>
+		<script type="text/javascript" src="flightplan/services/FlightPlanService.js"></script>
+
+		<!-- LoadPlan -->
+		<script type="text/javascript" src="loadplan/controllers/LoadPlanController.js"></script>
+		<script type="text/javascript" src="loadplan/services/LoadPlanService.js"></script>
+
+		<!-- Uld Plan -->
+		<script type="text/javascript" src="uldplan/controllers/UldPlanController.js"></script>
+		<script type="text/javascript" src="uldplan/services/UldPlanService.js"></script>
+
+		<!-- CRUD -->
+		<script type="text/javascript" src="crud/controllers/UserController.js"></script>
+		<script type="text/javascript" src="crud/services/UserService.js"></script>
+
+	</body>
+</html>

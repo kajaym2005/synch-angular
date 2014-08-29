@@ -1,0 +1,40 @@
+<Configure id="WebAppContext" class="org.mortbay.jetty.webapp.WebAppContext">
+	<Set name="classLoader">
+		<New class="jetty.JettyCustomWebAppClassLoader">
+			<Arg>
+				<Ref id="WebAppContext"/>
+			</Arg>
+			<Arg>
+				<Array type="java.lang.String">
+					<Item><SystemProperty name="jetty.home" default=""/>target/classes</Item>
+				</Array>
+			</Arg>
+			<Arg><SystemProperty name="jetty.home" default=""/>target/cargoopswar2/WEB-INF/classes</Arg>
+		</New>
+	</Set>
+	<Get name="securityHandler">
+		<Set name="userRealm">
+			<New class="org.mortbay.jetty.security.HashUserRealm">
+				<Set name="name">NoSuchRealm</Set>
+				<Set name="config"><SystemProperty name="jetty.home" default=""/>src/main/resources/jetty/realm.properties</Set>
+			</New>
+		</Set>
+	</Get>
+	<Call name="addHandler">
+		<Arg>
+			<New class="org.mortbay.jetty.handler.RequestLogHandler">
+				<Set name="requestLog">
+					<New id="RequestLogImpl" class="org.mortbay.jetty.NCSARequestLog">
+						<Arg><SystemProperty name="jetty.logs" default="./logs"/>/yyyy_mm_dd_request.log</Arg>
+						<Set name="filenameDateFormat">yyyy_MM_dd</Set>
+						<Set name="retainDays">90</Set>
+						<Set name="append">true</Set>
+						<Set name="extended">false</Set>
+						<Set name="logCookies">false</Set>
+						<Set name="LogTimeZone">GMT</Set>						
+					</New>
+				</Set>
+			</New>
+		</Arg>
+	</Call>				
+</Configure>

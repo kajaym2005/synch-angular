@@ -1,0 +1,39 @@
+<div class="span6">
+  <div app-messages></div>
+  <table class="table table-striped table-condensed">
+    <thead>
+		<tr>
+			<td colspan="8" style="text-align:right;">
+				<div class="control-group">
+				  <label class="control-label" for="inputFilterValue">Filter : <input type="text" id="inputFilterValue" ng-model="filter.value"/></label>
+				 </div>
+			</td>
+		</tr>
+      <tr>
+        <th><a href ng-click="sortBy('firstName')">First name {{sortIconFor('firstName')}}</a></th>
+        <th><a href ng-click="sortBy('lastName')">Last name {{sortIconFor('lastName')}}</a></th>
+        <th><a href ng-click="sortBy('dateOfBirth')">Date Of Birth {{sortIconFor('dateOfBirth')}}</a></th>
+        <th><a href ng-click="sortBy('startDt')">Start Dt {{sortIconFor('startDt')}}</a></th>
+        <th><a href ng-click="sortBy('endDt')">End Dt {{sortIconFor('endDt')}}</a></th>
+        <th><a href ng-click="sortBy('email')">Email {{sortIconFor('email')}}</a></th>
+        <th><a href ng-click="sortBy('email')">Code {{sortIconFor('code')}}</a></th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in users">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.dateOfBirth | date: calendar.dateFormat }}</td>
+        <td>{{ user.startDt | date: calendar.dateFormat }}</td>
+        <td>{{ user.endDt | date: calendar.dateFormat }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.code }}</td>
+        <td><a ng-click="editUser(user.id)"><img src="../images/edit.gif" style="cursor:hand;"></a></td>
+        <td><a ng-click="deleteUser(user.id)"><img src="../images/delete.gif" style="cursor:hand;"></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <a ng-click="createNewUser()"><img src="../images/add_new.gif"  style="cursor:hand;"></a>
+</div>

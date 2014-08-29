@@ -1,0 +1,71 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util" 
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:aop="http://www.springframework.org/schema/aop" 
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+           http://www.springframework.org/schema/jee  http://www.springframework.org/schema/jee/spring-jee-3.2.xsd  
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	<!-- PropertyPlaceholderConfigurer and PropertyOverrideConfigurer Begin here -->
+	<util:list id="propertyConfigurerLocations">
+		<value>classpath:cargoops_product_default.properties</value>
+		<value>file:${cargoops_site_dir}/${cargoops_install_name}_site_${cargoops_env_name}.properties</value>
+	</util:list>
+	<util:list id="propertyOverrideConfigurerLocations">
+		<value>classpath:cargoops_product_default.properties</value>
+		<value>file:${cargoops_site_dir}/${cargoops_install_name}_site_${cargoops_env_name}.properties</value>
+	</util:list>
+	
+	<!-- Configurer that replaces #[...] placeholders with values from properties files -->
+	<!-- (in this app.server, app.server.version related properties) -->
+	<bean id="propertySquareBracketConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true"/>
+		<property name="locations">
+			<ref bean="propertyConfigurerLocations"/>
+		</property>
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+		<property name="placeholderPrefix" value="#["/>
+		<property name="placeholderSuffix" value="]"/>
+	</bean>
+	<!-- Configurer that replaces ${...} placeholders with values from properties files -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true"/>
+		<property name="locations">
+			<ref bean="propertyConfigurerLocations"/>
+		</property>
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+	</bean>
+	<bean id="propertyOverrideConfigurer" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+		<property name="ignoreResourceNotFound" value="true"/>
+		<property name="locations">
+			<ref bean="propertyOverrideConfigurerLocations"/>
+		</property>
+		<property name="ignoreInvalidKeys" value="true"/>
+	</bean>
+	<bean id="propertyHeirarchy" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations" ref="propertyConfigurerLocations"/>
+	</bean>
+	<!-- PropertyPlaceholderConfigurer and PropertyOverrideConfigurer Ends here -->
+	
+	<!-- Begin JNDI Template Configuration -->
+	<bean id="appsclusterJndiTemplate" class="org.springframework.jndi.JndiTemplate">
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">${appscluster.java.naming.factory.initial}</prop>
+				<prop key="java.naming.provider.url">${appscluster.java.naming.provider.url}</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- End JNDI Template Configuration -->
+
+	
+	<context:component-scan base-package="com.asw.afls.cargoopsweb.resources" />
+
+
+</beans>	

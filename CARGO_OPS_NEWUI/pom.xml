@@ -1,0 +1,323 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.asw.afls.cargoops</groupId>
+	<artifactId>cargoopswar2</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>cargoopswar2 Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<jetty.version>6.1.4</jetty.version>
+		<log4j.version>1.6.1</log4j.version>
+		<junit.version>4.10</junit.version>
+		<commons-io-version>2.0.1</commons-io-version>
+		<spring.version>3.2.4.RELEASE</spring.version>
+		<jersey-spring3.version>2.4.1</jersey-spring3.version>
+		<jstl.version>1.2</jstl.version>
+		<hibernate.validator.version>5.0.0.Final</hibernate.validator.version>
+		
+		<!-- Jersey + JDK 1.6 version -->
+		<jdk.version>1.6</jdk.version>
+		<jersey.version>2.5.1</jersey.version>
+		<jersey-json.version>1.18.1</jersey-json.version>
+		<jersey-media-moxy.version>2.5.1</jersey-media-moxy.version>
+		<weblogic.version>10.3</weblogic.version>
+		
+		<!-- Jersey + JDK 1.7 version -->
+		<!--
+		<jdk.version>1.7</jdk.version>
+		<jersey.version>2.10.1</jersey.version>
+		<jersey-json.version>1.18.1</jersey-json.version>
+		<jersey-media-moxy.version>2.10.1</jersey-media-moxy.version>
+		-->
+		
+		<cargoops-modules-release-version>0.0.1-SNAPSHOT</cargoops-modules-release-version>
+		
+	</properties>
+	<!--
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites> 
+	-->
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			  <groupId>org.slf4j</groupId>
+			  <artifactId>slf4j-api</artifactId>
+			  <version>${log4j.version}</version>
+		 </dependency>
+		 <dependency>
+			  <groupId>org.slf4j</groupId>
+			  <artifactId>slf4j-log4j12</artifactId>
+			  <version>${log4j.version}</version>
+		 </dependency>
+		<!-- JETTY DEPENDENCIES -->
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty</artifactId>
+			<version>${jetty.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty-util</artifactId>
+			<version>${jetty.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty-management</artifactId>
+			<version>${jetty.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io-version}</version>
+		</dependency>
+		<!-- SPRING DEPENDENCIES -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- JERSEY DEPENDENCIES -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<!-- jersey-container-servlet if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core" -->
+			<artifactId>jersey-container-servlet-core</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-moxy</artifactId>
+			<version>${jersey-media-moxy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-bean-validation</artifactId>
+			<version>${jersey.version}</version>
+        </dependency>		
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+		<!-- JERSEY + SPRING -->
+		<dependency>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-spring3</artifactId>
+			<version>${jersey-spring3.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>		
+		<!-- CARGO_OPS SERVER DEPENDENCIES -->
+		<dependency>
+			<groupId>CARGO_OPS_APP</groupId>
+			<artifactId>ejb_Buildplan_app</artifactId>
+			<version>${cargoops-modules-release-version}</version>
+			<type>ejb-client</type>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-lang</groupId>
+					<artifactId>commons-lang</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>quartz</groupId>
+					<artifactId>quartz</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.itextpdf</groupId>
+					<artifactId>itextpdf</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>net.sf.json-lib</groupId>
+					<artifactId>json-lib</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-digester</groupId>
+					<artifactId>commons-digester</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-dbcp</groupId>
+					<artifactId>commons-dbcp</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>addval</groupId>
+					<artifactId>common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>addval</groupId>
+					<artifactId>cargoui</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>addval</groupId>
+					<artifactId>cacheejb</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>addval</groupId>
+					<artifactId>taskejb</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>addval</groupId>
+					<artifactId>cargobkg-publicapi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>addval</groupId>
+					<artifactId>commonrules-xbeans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_COMMON</groupId>
+					<artifactId>lib_cargo_ops_utils_core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_APP</groupId>
+					<artifactId>lib_shipment_engine_app</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_APP</groupId>
+					<artifactId>lib_shipment_manager_app</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_APP</groupId>
+					<artifactId>lib_ops_outbound_gateway_app</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_APP</groupId>
+					<artifactId>lib_uld_mgr_app</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_DATA</groupId>
+					<artifactId>lib_ops_buildplan_data</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_DATA</groupId>
+					<artifactId>lib_messaging_data</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_DATA</groupId>
+					<artifactId>lib_ship_data</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_DATA</groupId>
+					<artifactId>lib_flightconfig_data</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>CARGO_OPS_DATA</groupId>
+					<artifactId>lib_discrepancy_handling_data</artifactId>
+				</exclusion>
+			</exclusions>			
+		</dependency>
+		
+		<!-- WEBLOGIC DEPENDENCY -->
+		<dependency>
+			<groupId>weblogic</groupId>
+			<artifactId>wlclient</artifactId>
+			<version>${weblogic.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>cargoopswar2</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+			<!--
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>process-resources</id>
+						<phase>process-resources</phase>
+						<configuration>
+							<tasks>
+								<copy todir="${pom.basedir}/target/${project.artifactId}/bower_components">
+									<fileset dir="${pom.basedir}/bower_components" includes="**/*"/>
+								</copy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			-->
+			<!-- uncomment these plugin first time execute bower install and npm install -->
+			<!--
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<configuration>
+							<target name="building">
+								<echo>NPM INSTALL</echo>
+								<exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+									<arg line="/c npm install"/>
+								</exec>
+								<exec executable="bash" dir="${project.basedir}" osfamily="unix" failonerror="true">
+									<arg line="npm install"/>
+								</exec>
+								<echo>BOWER INSTALL</echo>
+								<exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+									<arg line="/c bower install"/>
+								</exec>
+								<exec executable="bash" dir="${project.basedir}" osfamily="unix" failonerror="true">
+									<arg line="bower install"/>
+								</exec>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			-->
+		</plugins>
+	</build>
+</project>
